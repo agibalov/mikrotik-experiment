@@ -10,13 +10,10 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws MikrotikApiException, InterruptedException, JsonProcessingException {
-        ApiConnection connection = ApiConnection.connect("192.168.10.1");
-        try {
+        try(ApiConnection connection = ApiConnection.connect("192.168.10.1")) {
             connection.login("admin", "");
             dumpInterfaces(connection);
             pingAllMyISPs(connection);
-        } finally {
-            connection.disconnect();
         }
     }
 
